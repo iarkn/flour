@@ -1,6 +1,12 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+// TODO: Remove this
+typedef enum {
+    TILE_EMPTY = 0,
+    TILE_NOT_EMPTY
+} Tile;
+
 typedef struct {
     int width;
     int height;

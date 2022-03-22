@@ -20,6 +20,12 @@ static void camera_update(void)
 
 void renderer_init(void)
 {
+    initscr();
+    keypad(stdscr, true);
+    curs_set(0);
+    noecho();
+    cbreak();
+
     getmaxyx(stdscr, renderer.max_rows, renderer.max_cols);
     renderer.main = newwin(renderer.max_rows / 1.5, renderer.max_cols, 0, 0);
 }
@@ -48,7 +54,7 @@ void renderer_draw(void)
 
         if (dx == p->x && dy == p->y) {
             mvwaddstr(win, height - y, 2 * x + 1, "██");
-        } else if (world_get_tile(&game.world, dx, dy) == 1) {
+        } else if (world_get_tile(&game.world, dx, dy) == TILE_NOT_EMPTY) {
             mvwaddstr(win, height - y, 2 * x + 1, "##");
         }
     }

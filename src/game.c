@@ -20,7 +20,7 @@ void game_move_player(int x, int y)
     x += game.player.x;
     y += game.player.y;
 
-    if (world_get_tile(&game.world, x, y) == 0) {
+    if (world_get_tile(&game.world, x, y) == TILE_EMPTY) {
         player_set_pos(&game.player, x, y);
     }
 }
