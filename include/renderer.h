@@ -4,8 +4,7 @@
 #include <ncurses.h>
 
 typedef struct {
-    int width;
-    int height;
+    int w, h;
     int x, y;
 } Camera;
 

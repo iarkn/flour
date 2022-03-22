@@ -8,21 +8,21 @@ DEPS := $(OBJS:%.o=%.d)
 PKGS := ncursesw
 
 CC     ?= gcc
-CFLAGS := -O3 -ggdb -std=c17 -Wall -Wextra -Wpedantic \
+CFLAGS += -O3 -ggdb -std=c17 -Wall -Wextra -Wpedantic \
 	  -Iinclude `pkg-config --cflags $(PKGS)`
 LDLIBS := `pkg-config --libs $(PKGS)`
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	@echo "-- Linking object files"
+	@echo "-- Linking executable $@"
 	@$(CC) $^ $(LDLIBS) -o $@
 
 -include $(DEPS)
 
 $(BUILD)/obj/%.o: src/%.c
 	@mkdir -p $(@D)
-	@echo "-- Compiling $<"
+	@echo "-- Compiling file $<"
 	@$(CC) $(CFLAGS) -MMD -c $< -o $@
 
 clean:
