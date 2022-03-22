@@ -2,7 +2,7 @@ PROJECT := flour
 BUILD   := build
 TARGET  := $(BUILD)/$(PROJECT)
 
-SRCS := $(shell find src -type f -name *.c)
+SRCS := $(shell find src -type f -name "*.c")
 OBJS := $(SRCS:src/%.c=$(BUILD)/obj/%.o)
 DEPS := $(OBJS:%.o=%.d)
 PKGS := ncursesw

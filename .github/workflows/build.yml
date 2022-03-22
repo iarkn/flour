@@ -1,0 +1,25 @@
+name: Build Changes
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        cc: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          if [[ "$RUNNER_OS" == 'Linux' ]]; then
+            sudo apt install ${{ matrix.cc }} make pkg-config libncurses-dev
+          elif [[ "$RUNNER_OS" == 'macOS' && "${{ matrix.cc }}" == 'gcc' ]]; then
+            brew install gcc make pkg-config ncurses
+          fi
+
+      - name: Build project
+        run: make
+        env:
+          CC: ${{ matrix.cc }}

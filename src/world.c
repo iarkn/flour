@@ -1,5 +1,6 @@
 #include "world.h"
 
+#include <stdbool.h>
 #include <stdlib.h>
 
 void world_init(World *world, int width, int height)
