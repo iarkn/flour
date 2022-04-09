@@ -3,16 +3,16 @@
 
 #include <ncurses.h>
 
-typedef struct {
+struct Camera {
     int w, h;
     int x, y;
-} Camera;
+};
 
-typedef struct {
+struct Renderer {
     WINDOW *main;
     int max_rows;
     int max_cols;
-} Renderer;
+};
 
 void renderer_init(void);
 void renderer_free(void);

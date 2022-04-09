@@ -2,19 +2,19 @@
 #define WORLD_H
 
 // TODO: Remove this
-typedef enum {
+enum Tile {
     TILE_EMPTY = 0,
     TILE_NOT_EMPTY
-} Tile;
+};
 
-typedef struct {
+struct World {
     int width;
     int height;
     int *tiles;
-} World;
+};
 
-void world_init(World *world, int width, int height);
-void world_free(World *world);
-int world_get_tile(const World *world, int x, int y);
+void world_init(struct World *world, int width, int height);
+void world_free(struct World *world);
+int world_get_tile(const struct World *world, int x, int y);
 
 #endif // WORLD_H

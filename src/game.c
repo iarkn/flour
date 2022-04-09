@@ -1,6 +1,6 @@
 #include "game.h"
 
-Game game;
+struct Game game;
 
 void game_init(int width, int height)
 {

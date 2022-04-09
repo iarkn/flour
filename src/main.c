@@ -58,8 +58,6 @@ int main(void)
         }
     }
 
-    endwin();
-
     renderer_free();
     game_free();
 

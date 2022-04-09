@@ -1,12 +1,12 @@
 #include "renderer.h"
 
 #include "game.h"
-#include "umath.h"
+#include "math/umath.h"
 
 #define CAMERA_BORDER_OFFSET 2
 
-Camera camera;
-Renderer renderer;
+struct Camera camera;
+struct Renderer renderer;
 
 static void camera_update(void)
 {
@@ -17,21 +17,21 @@ static void camera_update(void)
 
     int cw = camera.w;
     int ch = camera.h;
-    Player *p = &game.player;
+    struct Player p = game.player;
+
+    camera.x = clamp(p.x - cw / 2, 0, game.world.width - cw);
+    camera.y = clamp(p.y - ch / 2, 0, game.world.height - ch);
 
 #ifdef DEBUG
-    move(LINES - 2, 0);
+    move(LINES - 3, 0);
     clrtobot();
     mvprintw(LINES - 3, 0, "world: %dx%d",
              game.world.width, game.world.height);
     mvprintw(LINES - 2, 0, "player: (%d,%d) (scr %d,%d)",
-             p->x, p->y, p->x - camera.x, p->y - camera.y);
+             p.x, p.y, p.x - camera.x, p.y - camera.y);
     mvprintw(LINES - 1, 0, "camera: (%d,%d) (mid %d,%d) %dx%d",
              camera.x, camera.y, cw / 2, ch / 2, cw, ch);
 #endif
-
-    camera.x = clampi(p->x - cw / 2, 0, game.world.width - cw);
-    camera.y = clampi(p->y - ch / 2, 0, game.world.height - ch);
 }
 
 void renderer_init(void)
@@ -50,12 +50,13 @@ void renderer_init(void)
 
 void renderer_free(void)
 {
+    endwin();
     delwin(renderer.main);
 }
 
 void renderer_draw(void)
 {
-    Player *p = &game.player;
+    struct Player p = game.player;
     WINDOW *win = renderer.main;
 
     camera_update();
@@ -75,7 +76,7 @@ void renderer_draw(void)
         mvwaddstr(win, height - height / 2, width / 2 + 1, "@");
 #endif
 
-        if (dx == p->x && dy == p->y) {
+        if (dx == p.x && dy == p.y) {
             mvwaddstr(win, height - y, x + 1, "ඞ");
         } else if (world_get_tile(&game.world, dx, dy) == TILE_NOT_EMPTY) {
             mvwaddstr(win, height - y, x + 1, "#");

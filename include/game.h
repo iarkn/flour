@@ -4,13 +4,13 @@
 #include "player.h"
 #include "world.h"
 
-typedef struct {
-    World world;
-    Player player;
-} Game;
+struct Game {
+    struct World world;
+    struct Player player;
+};
 
 // global
-extern Game game;
+extern struct Game game;
 
 void game_init(int width, int height);
 void game_free(void);

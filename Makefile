@@ -8,15 +8,15 @@ DEPS := $(OBJS:%.o=%.d)
 PKGS := ncursesw
 
 CC     ?= gcc
-CFLAGS += -O3 -ggdb -std=c17 -Wall -Wextra -Wpedantic \
-	  -Iinclude `pkg-config --cflags $(PKGS)`
-LDLIBS := `pkg-config --libs $(PKGS)`
+CFLAGS += -O3 -ggdb -std=c17 -Wall -Wextra -Wpedantic -Iinclude
+CFLAGS += $(shell pkg-config --cflags $(PKGS))
+LDLIBS := $(shell pkg-config --libs $(PKGS))
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	@echo "-- Linking executable $@"
-	@$(CC) $^ $(LDLIBS) -o $@
+	@$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
 -include $(DEPS)
 
