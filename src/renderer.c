@@ -1,9 +1,20 @@
 #include "renderer.h"
 
 #include "game.h"
-#include "math/umath.h"
+#include "umath.h"
 
 #define CAMERA_BORDER_OFFSET 2
+
+struct Camera {
+    int w, h;
+    int x, y;
+};
+
+struct Renderer {
+    WINDOW *main;
+    int max_rows;
+    int max_cols;
+};
 
 struct Camera camera;
 struct Renderer renderer;
@@ -77,7 +88,7 @@ void renderer_draw(void)
 #endif
 
         if (dx == p.x && dy == p.y) {
-            mvwaddstr(win, height - y, x + 1, "ඞ");
+            mvwaddstr(win, height - y, x + 1, "d");
         } else if (world_get_tile(&game.world, dx, dy) == TILE_NOT_EMPTY) {
             mvwaddstr(win, height - y, x + 1, "#");
         }

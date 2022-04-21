@@ -1,6 +1,12 @@
 PROJECT := flour
 BUILD   := build
-TARGET  := $(BUILD)/$(PROJECT)
+
+ifeq ($(DEBUG),1)
+	BUILD  := $(BUILD)/debug
+	CFLAGS += -DDEBUG
+endif
+
+TARGET := $(BUILD)/$(PROJECT)
 
 SRCS := $(shell find src -type f -name "*.c")
 OBJS := $(SRCS:src/%.c=$(BUILD)/obj/%.o)
@@ -26,6 +32,6 @@ $(BUILD)/obj/%.o: src/%.c
 	@$(CC) $(CFLAGS) -MMD -c $< -o $@
 
 clean:
-	@rm -rf $(BUILD)
+	@rm -rf build
 
 .PHONY: all clean

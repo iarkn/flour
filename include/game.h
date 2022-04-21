@@ -12,7 +12,7 @@ struct Game {
 // global
 extern struct Game game;
 
-void game_init(int width, int height);
+void game_init(int width, int height, int seed);
 void game_free(void);
 void game_move_player(int x, int y);
 

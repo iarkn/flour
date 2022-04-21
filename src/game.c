@@ -2,9 +2,10 @@
 
 struct Game game;
 
-void game_init(int width, int height)
+void game_init(int width, int height, int seed)
 {
     world_init(&game.world, width, height);
+    world_gen(&game.world, seed);
 
     game.player.x = width / 2;
     game.player.y = height / 2;
