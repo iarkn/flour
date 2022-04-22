@@ -26,12 +26,12 @@ static void camera_update(void)
     camera.w -= CAMERA_BORDER_OFFSET;
     camera.h -= CAMERA_BORDER_OFFSET;
 
-    int cw = camera.w;
-    int ch = camera.h;
+    const int cw = camera.w;
+    const int ch = camera.h;
     struct Player p = game.player;
 
-    camera.x = clamp(p.x - cw / 2, 0, game.world.width - cw);
-    camera.y = clamp(p.y - ch / 2, 0, game.world.height - ch);
+    camera.x = clamp(p.x - cw / 2, 0, max(game.world.width - cw, 0));
+    camera.y = clamp(p.y - ch / 2, 0, max(game.world.height - ch, 0));
 
 #ifdef DEBUG
     move(LINES - 3, 0);

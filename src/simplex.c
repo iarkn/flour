@@ -22,7 +22,7 @@ const int perm[] = {
     222,114, 67, 29, 24, 72,243,141,128,195, 78, 66,215, 61,156,180
 };
 
-static int floor(float x)
+static int fastfloor(float x)
 {
     int xi = (int) x;
     return x < xi ? xi - 1 : xi;
@@ -51,7 +51,7 @@ static float grad2d(int hash, float x, float y)
 
 float simplex_noise1d(float x, int seed)
 {
-    int i0 = floor(x);
+    int i0 = fastfloor(x);
     int i1 = i0 + 1;
 
     float x0 = x - i0;
@@ -73,8 +73,8 @@ float simplex_noise2d(float x, float y, int seed)
     float n0, n1, n2;
 
     float s = (x + y) * F2;
-    int i = floor(x + s);
-    int j = floor(y + s);
+    int i = fastfloor(x + s);
+    int j = fastfloor(y + s);
     float t = (i + j) * G2;
 
     float x0 = i - t;
