@@ -3,12 +3,14 @@
 #include "simplex.h"
 
 #include <stdlib.h>
+#include <string.h>
 
 void world_init(struct World *world, int width, int height)
 {
     world->width = width;
     world->height = height;
     world->tiles = realloc(world->tiles, width * height * sizeof(world->tiles[0]));
+    memset(world->tiles, TILE_EMPTY, width * height * sizeof(world->tiles[0]));
 }
 
 void world_free(struct World *world)
