@@ -21,8 +21,8 @@ static void camera_update(void)
 {
     getmaxyx(renderer.main, camera.h, camera.w);
 
-    const int cw = camera.w;
-    const int ch = camera.h;
+    int cw = camera.w;
+    int ch = camera.h;
     struct Player p = game.player;
 
     camera.x = clamp(p.x - cw / 2, 0, max(game.world.width - cw, 0));
@@ -39,8 +39,6 @@ void renderer_init(void)
 
     getmaxyx(stdscr, renderer.max_rows, renderer.max_cols);
     renderer.main = newwin(renderer.max_rows, renderer.max_cols, 0, 0);
-
-    camera_update();
 }
 
 void renderer_free(void)
