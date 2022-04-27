@@ -54,7 +54,8 @@ void renderer_draw(void)
 
     camera_update();
 
-    erase();
+    werase(win);
+    wnoutrefresh(win);
     wnoutrefresh(stdscr);
 
     int width = camera.w;
@@ -69,9 +70,8 @@ void renderer_draw(void)
         mvwaddstr(win, height - height / 2 - 1, width / 2, "@");
 #endif
 
-        if (world_get_tile(&game.world, dx, dy) == TILE_NOT_EMPTY) {
-            mvwaddstr(win, height - y - 1, x, "#");
-        }
+        const struct Tile *tile = world_get_tile(&game.world, dx, dy);
+        if (tile) mvwaddstr(win, height - y - 1, x, tile->icon);
     }
 
     wnoutrefresh(win);

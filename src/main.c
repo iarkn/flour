@@ -4,11 +4,15 @@
 #include <locale.h>
 #include <stdbool.h>
 
-int main(void)
+int main(int argc, char **argv)
 {
+    char *fpath = argc > 1 ? argv[1] : NULL;
+
     setlocale(LC_ALL, "C.UTF-8");
 
-    game_init(150, 90, 420);
+    if (!fpath || (fpath && !game_load(fpath))) {
+        game_init(150, 90, 420);
+    }
     renderer_init();
 
     int c;
@@ -41,6 +45,8 @@ int main(void)
             break;
         }
     }
+
+    if (fpath) game_save(fpath);
 
     renderer_free();
     game_free();
