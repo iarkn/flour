@@ -70,9 +70,7 @@ void world_read(struct World *world, FILE *file)
     fread(&world->seed, sizeof(world->seed), 1, file);
 
     int size = world->width * world->height;
-    world->tiles = world->tiles != NULL
-        ? realloc(world->tiles, size * sizeof(world->tiles[0]))
-        : malloc(size * sizeof(world->tiles[0]));
+    world->tiles = realloc(world->tiles, size * sizeof(world->tiles[0]));
 
     for (int i = 0; i < size; ++i) {
         int x = i % world->width, y = i / world->width;

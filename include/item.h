@@ -5,11 +5,10 @@
 
 enum TileItem {
     TILE_FLOOR = 0,
-    TILE_WALL,
-    TILE_COUNT
+    TILE_WALL
 };
 
 // global
-extern const struct Tile tiles[TILE_COUNT];
+extern const struct Tile tiles[];
 
 #endif // ITEM_H
