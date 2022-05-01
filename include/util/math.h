@@ -1,7 +1,7 @@
-#ifndef UMATH_H
-#define UMATH_H
+#ifndef UTIL_MATH_H
+#define UTIL_MATH_H
 
 float clamp(float val, float min, float max);
 float max(float a, float b);
 
-#endif // UMATH_H
+#endif // UTIL_MATH_H

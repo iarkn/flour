@@ -1,4 +1,4 @@
-#include "umath.h"
+#include "util/math.h"
 
 float clamp(float val, float min, float max)
 {

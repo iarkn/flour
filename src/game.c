@@ -1,14 +1,14 @@
 #include "game.h"
 
-#include "zip.h"
+#include "util/gzip.h"
 
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
 
-const int file_sign = 0xded42069;
-
 struct Game game;
+
+const int file_sign = 0xded42069;
 
 void game_init(int width, int height, int seed)
 {
@@ -37,7 +37,7 @@ bool game_save(const char *path)
     rewind(tmp);
 
     bool ret = true;
-    if (zip_c(zip_def(tmp, file, -1))) {
+    if (gzip_c(gzip_def(tmp, file, -1))) {
         fprintf(stderr, "game_save: failed to compress file '%s'\n", path);
         ret = false;
     }
@@ -58,7 +58,7 @@ bool game_load(const char *path)
         return false;
     }
 
-    if (zip_c(zip_inf(file, tmp))) {
+    if (gzip_c(gzip_inf(file, tmp))) {
         fprintf(stderr, "game_load: failed to decompress file '%s'\n", path);
         return false;
     }
@@ -68,13 +68,13 @@ bool game_load(const char *path)
 
     rewind(tmp);
     fread(&sign, 1, sizeof(sign), tmp);
-    if (sign != file_sign) {
+    if (sign == file_sign) {
+        world_read(&game.world, tmp);
+        player_read(&game.player, tmp);
+    } else {
         fprintf(stderr, "game_load: wrong file signature in file '%s'\n", path);
         ret = false;
     }
-
-    world_read(&game.world, tmp);
-    player_read(&game.player, tmp);
 
     fclose(tmp);
     fclose(file);

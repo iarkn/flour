@@ -1,4 +1,4 @@
-#include "simplex.h"
+#include "util/simplex.h"
 
 #define F2 0.366025403f // (sqrt(3.0) - 1.0) / 2.0
 #define G2 0.211324865f // (3.0 - sqrt(3.0)) / 6.0

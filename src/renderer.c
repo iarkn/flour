@@ -1,7 +1,7 @@
 #include "renderer.h"
 
 #include "game.h"
-#include "umath.h"
+#include "util/math.h"
 
 struct Camera {
     int w, h;

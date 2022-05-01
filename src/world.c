@@ -1,7 +1,7 @@
 #include "world.h"
 
 #include "item.h"
-#include "simplex.h"
+#include "util/simplex.h"
 
 #include <stdlib.h>
 #include <string.h>

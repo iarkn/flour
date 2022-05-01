@@ -1,7 +1,7 @@
-#ifndef SIMPLEX_H
-#define SIMPLEX_H
+#ifndef UTIL_SIMPLEX_H
+#define UTIL_SIMPLEX_H
 
 float simplex_noise1d(float x, int seed);
 float simplex_noise2d(float x, float y, int seed);
 
-#endif // SIMPLEX_H
+#endif // UTIL_SIMPLEX_H

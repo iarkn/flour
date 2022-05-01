@@ -1,10 +1,10 @@
-#include "zip.h"
+#include "util/gzip.h"
 
 #include <zlib.h>
 
-#define CHUNK 32768
+#define CHUNK 16384
 
-int zip_def(FILE *src, FILE *dst, int level)
+int gzip_def(FILE *src, FILE *dst, int level)
 {
     int ret, flush;
     unsigned int have;
@@ -12,8 +12,7 @@ int zip_def(FILE *src, FILE *dst, int level)
     unsigned char out[CHUNK];
 
     z_stream zs = { .zalloc = Z_NULL, .zfree = Z_NULL, .opaque = Z_NULL };
-    ret = deflateInit2(&zs, level, Z_DEFLATED, 31, 8,
-                       Z_DEFAULT_STRATEGY);
+    ret = deflateInit2(&zs, level, Z_DEFLATED, 31, 8, Z_DEFAULT_STRATEGY);
     if (ret != Z_OK) return ret;
 
     do {
@@ -42,7 +41,7 @@ int zip_def(FILE *src, FILE *dst, int level)
     return Z_OK;
 }
 
-int zip_inf(FILE *src, FILE *dst)
+int gzip_inf(FILE *src, FILE *dst)
 {
     int ret;
     unsigned int have;
@@ -94,11 +93,11 @@ int zip_inf(FILE *src, FILE *dst)
     return ret == Z_STREAM_END ? Z_OK : Z_DATA_ERROR;
 }
 
-int zip_c(int code)
+int gzip_c(int code)
 {
     if (code == Z_OK) return 0;
 
-    fputs("zip: ", stderr);
+    fputs("gzip: ", stderr);
     switch (code) {
     case Z_ERRNO:
         fputs("error during processing\n", stderr);
