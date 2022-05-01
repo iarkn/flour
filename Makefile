@@ -16,7 +16,7 @@ PKGS := ncursesw
 CC     ?= gcc
 CFLAGS += -O3 -ggdb -std=c17 -Wall -Wextra -Wpedantic -Iinclude
 CFLAGS += $(shell pkg-config --cflags $(PKGS))
-LDLIBS := $(shell pkg-config --libs $(PKGS))
+LDLIBS := $(shell pkg-config --libs $(PKGS)) -lz
 
 all: $(TARGET)
 

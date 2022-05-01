@@ -9,11 +9,12 @@ Moving square block in terminal thing.
 - GNU Make
 - GCC or any C17 compiler that works
 - ncursesw (>= 6.3)
+- zlib (>= 1.2.11)
 
 Older versions of ncurses-wide will probably work. For Debian-based
 distributions, do the following to install the prerequisites:
 
-    # apt install gcc make pkg-config libncurses-dev
+    # apt install gcc make pkg-config libncurses-dev zlib1g-dev
 
 Then, get the source code and build the project:
 
