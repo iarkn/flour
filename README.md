@@ -6,23 +6,21 @@ Moving square block in terminal thing.
 
 ### Prerequisites
 
-- GNU Make
-- GCC or any C17 compiler that works
-- ncursesw (>= 6.3)
-- zlib (>= 1.2.11)
+* c17 compiler
+* meson
+* ncursesw
+* zlib
 
-Older versions of ncurses-wide will probably work. For Debian-based
-distributions, do the following to install the prerequisites:
+Installing the prerequisites on Debian unstable:
 
-    # apt install gcc make pkg-config libncurses-dev zlib1g-dev
+    # apt install gcc meson libncurses-dev zlib1g-dev
 
-Then, get the source code and build the project:
+To build, run the following:
 
-    $ git clone https://github.com/iarkn/flour.git && cd flour
-    $ make
+    $ meson setup build
+    $ meson compile -C build
 
-The build output is in the `build/` directory. To run the program, execute
-`./build/flour`.
+The build output should be in `build/flour` as an executable file.
 
 ## License
 

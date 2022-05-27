@@ -6,13 +6,9 @@
 
 int main(int argc, char **argv)
 {
-    char *fpath = argc > 1 ? argv[1] : NULL;
-
     setlocale(LC_ALL, "C.UTF-8");
 
-    if (!fpath || (fpath && !game_load(fpath))) {
-        game_init(150, 90, 420);
-    }
+    game_init(100, 150, 420);
     renderer_init();
 
     int c;
@@ -45,8 +41,6 @@ int main(int argc, char **argv)
             break;
         }
     }
-
-    if (fpath) game_save(fpath);
 
     renderer_free();
     game_free();

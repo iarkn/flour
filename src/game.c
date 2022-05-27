@@ -8,7 +8,7 @@
 
 struct Game game;
 
-const int file_sign = 0xded42069;
+const int file_sign = 0x666c6f75;
 
 void game_init(int width, int height, int seed)
 {

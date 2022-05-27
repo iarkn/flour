@@ -10,6 +10,7 @@ struct Camera {
 
 struct Renderer {
     WINDOW *main;
+    WINDOW *hud;
     int max_rows;
     int max_cols;
 };
@@ -39,6 +40,7 @@ void renderer_init(void)
 
     getmaxyx(stdscr, renderer.max_rows, renderer.max_cols);
     renderer.main = newwin(renderer.max_rows, renderer.max_cols, 0, 0);
+    renderer.hud = newwin(renderer.max_rows, renderer.max_cols, 0, 0);
 }
 
 void renderer_free(void)
@@ -51,11 +53,14 @@ void renderer_draw(void)
 {
     struct Player p = game.player;
     WINDOW *win = renderer.main;
+    WINDOW *hud = renderer.hud;
 
     camera_update();
 
     werase(win);
+    werase(hud);
     wnoutrefresh(win);
+    wnoutrefresh(hud);
     wnoutrefresh(stdscr);
 
     int width = camera.w;
@@ -88,6 +93,9 @@ void renderer_draw(void)
 
     mvwaddstr(win, height - 1 - p.y + camera.y, p.x - camera.x, "█");
     wnoutrefresh(win);
+
+    mvwprintw(hud, 1, 1, "(%d, %d)", p.x, p.y);
+    wnoutrefresh(hud);
 
     doupdate();
 }
